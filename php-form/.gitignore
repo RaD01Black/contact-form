@@ -1,0 +1,7 @@
+# PHP
+/vendor
+
+# Vercel
+.vercel
+
+composer.lock

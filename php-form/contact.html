@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form id="contactForm">
+    <input id="firstName" type="text" name="first_name">
+    <input id="lastName" type="text" name="last_name">
+    <input id="subject" type="text" name="subject">
+    <textarea id="description" name="description"></textarea>
+
+    <button type="submit">Submit</button>
+
+    <div id="messageContainer"></div>
+  </form>
+
+  <script>
+    const contactForm = document.getElementById('contactForm');
+    const firstName = document.getElementById('firstName');
+    const lastName = document.getElementById('lastName');
+    const subject = document.getElementById('subject');
+    const description = document.getElementById('description');
+    const messageContainer = document.getElementById('messageContainer');
+
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData();
+      formData.append('first_name', firstName.value);
+      formData.append('last_name', lastName.value);
+      formData.append('subject', subject.value);
+      formData.append('description', description.value);
+      fetch('api/index.php', { method: "POST", body: formData }).then(res => {
+        return res.text();
+      }).then(res => {
+        console.log(res);
+        messageContainer.textContent = res;
+      })
+    })
+  </script>
+</body>
+</html>
